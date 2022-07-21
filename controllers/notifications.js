@@ -27,7 +27,15 @@ module.exports = {
                 const payload = {
                     notification: {
                       title: notification.titulo,
-                      body: notification.mensaje
+                      body: notification.mensaje,
+                    },
+                   
+                    data: {
+                        name: notification.name,
+                        address: notification.address,
+                        latitud: notification.lat,
+                        longitud: notification.lng,
+                        idUser: notification.id
                     }
                   };
         
@@ -67,14 +75,43 @@ module.exports = {
                 notification: {
                   title: notification.titulo,
                   body: notification.mensaje
+        
                 },
-                tokens: tokens
+                tokens: tokens,
+                click_action:"OPEN_ACTIVITY_1",
+                android: {
+                    notification: {
+                      imageUrl: 'https://res.cloudinary.com/erickbot/image/upload/v1658338419/hgfe5xknfki7pv5flqpf.png'
+                    }
+                  },
+                apns: {
+                    payload: {
+                      aps: {
+                        'mutable-content': 1
+                      }
+                    },
+                    fcm_options: {
+                      image: 'https://res.cloudinary.com/erickbot/image/upload/v1658338419/hgfe5xknfki7pv5flqpf.png'
+                    }
+                },
+                webpush: {
+                    headers: {
+                      image: 'https://res.cloudinary.com/erickbot/image/upload/v1658338419/hgfe5xknfki7pv5flqpf.png'
+                    }
+                  },
+                data: {
+                    name: notification.name,
+                    address: notification.address,
+                    latitud: notification.lat,
+                    longitud: notification.lng,
+                    idUser: notification.id
+                }
               };
             await admin.messaging().sendMulticast(payload);
 
             return res.status(200).json({
                 ok: true,
-                message: 'Envio de notification con exito',
+                message: 'Envio de notification multicast con exito',
             });
 
         }catch(error){

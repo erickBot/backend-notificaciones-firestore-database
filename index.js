@@ -16,7 +16,7 @@ app.use(express.json());//para entender los archivos json
 app.use(require('./routes/index'));
 
 
-//contenido estatico - archivo html, el paquete path reemplaza los \ de las direcciones de directrio
+//contenido estatico - archivo html, el paquete path reemplaza los \ de las direcciones de directorio
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -25,5 +25,5 @@ app.get('*',(req, res)=>{
 });
 
 app.listen(port, ()=>{
-console.log(`serveer app listening at http//localhost:${port}`);
+    console.log(`server app listening at http//localhost:${port}`);
 });
